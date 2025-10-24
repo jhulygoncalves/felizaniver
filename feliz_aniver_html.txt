@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Feliz Aniversário!</title>
+<style>
+  body {
+    background: linear-gradient(to right, #ff9a9e, #fad0c4);
+    font-family: 'Arial', sans-serif;
+    text-align: center;
+    padding-top: 100px;
+    overflow-x: hidden;
+  }
+
+  h1 {
+    font-size: 3em;
+    color: #fff;
+    text-shadow: 2px 2px #ff69b4;
+  }
+
+  #confetes {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 9999;
+  }
+
+  .confete {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background-color: #fff;
+    opacity: 0.8;
+    border-radius: 50%;
+    animation: cair linear infinite;
+  }
+
+  @keyframes cair {
+    0% { transform: translateY(-10px) rotate(0deg); }
+    100% { transform: translateY(110vh) rotate(360deg); }
+  }
+
+  #carrossel {
+    margin-top: 30px;
+    max-width: 80%;
+    border-radius: 15px;
+    box-shadow: 2px 2px 15px rgba(0,0,0,0.3);
+  }
+
+  button {
+    padding: 15px 25px;
+    font-size: 1.2em;
+    margin-top: 30px;
+    border: none;
+    border-radius: 10px;
+    background-color: #ff69b4;
+    color: white;
+    cursor: pointer;
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+  }
+
+  button:hover {
+    background-color: #ff85c1;
+  }
+</style>
+</head>
+<body>
+
+<h1>Feliz Aniversário, Amor! 💖</h1>
+<button id="botaoCarrossel">📸 Ver fotos</button>
+<img id="carrossel" src="" alt="Fotos" style="display:none;">
+
+<div id="confetes"></div>
+
+
+<div id="mensagem">
+Meu bem, hoje é um dia especial, o dia em que celebramos você. Mesmo longe, não posso me sentir mais sortuda, eu te tenho. Quero que saiba que dividir o mesmo planeta que você é um privilégio e eu não falo isso da boca pra fora. É realmente um prazer saber que, no meio de bilhões de pessoas, a vida me colocou na mesma linha de tempo que a sua. Que a gente compartilha o mesmo céu.<br><br>
+Eu amo tanto de você... Eu amo o teu riso, amo o jeito que teu olhar muda quando fala de algo que te empolga, amo até o silêncio que existe entre a gente quando nenhuma palavra é necessária. Porque contigo, até o silêncio tem sentido. (Mesmo que ele ocorra raríssimas vezes, o lado ruim de ter uma tagarela por perto)<br><br>
+Mas hoje, eu só quero te agradecer por ser quem é. Por me permitir fazer parte dos teus dias, por me ensinar sobre amor com atitudes, e por me mostrar dia após dia a beleza de amar e ser amada. <br>
+Feliz aniversário, meu amor. Que teu caminho continue sendo bonito, verdadeiro, cheio de amor e que eu possa estar nele, celebrando contigo cada nascer de sol, cada riso leve, cada instante que faz da tua vida uma história que vale a pena contar. Feliz 27 anos! Te amo mais do que qualquer palavra pode expressar e mais do que qualquer distância pode conter.
+</div>
+
+
+<script>
+// Confetes animados
+function criarConfete() {
+  const confete = document.createElement('div');
+  confete.classList.add('confete');
+  confete.style.left = Math.random() * window.innerWidth + 'px';
+  confete.style.backgroundColor = `hsl(${Math.random()*360}, 70%, 60%)`;
+  confete.style.width = confete.style.height = Math.random() * 10 + 5 + 'px';
+  confete.style.animationDuration = 3 + Math.random()*5 + 's';
+  document.getElementById('confetes').appendChild(confete);
+  setTimeout(() => confete.remove(), 8000);
+}
+setInterval(criarConfete, 100);
+
+// Carrossel de fotos
+const fotos = [
+  'foto1.jpg',
+  'foto2.jpg',
+  'foto3.jpg'
+]; // Substitua pelos nomes das suas fotos
+let indice = 0;
+let intervalo;
+
+const botao = document.getElementById('botaoCarrossel');
+const img = document.getElementById('carrossel');
+
+botao.addEventListener('click', () => {
+  img.style.display = 'block';
+  img.src = fotos[indice];
+  
+  if(intervalo) clearInterval(intervalo); // Evita múltiplos intervalos
+
+  intervalo = setInterval(() => {
+    indice = (indice + 1) % fotos.length;
+    img.src = fotos[indice];
+  }, 3000); // muda a cada 3 segundos
+});
+</script>
+
+</body>
+</html>
